@@ -1,0 +1,40 @@
+# Uses python3
+import sys
+import copy
+
+def optimal_sequence(n):
+    sequence = []
+    minNumOperations = [sys.maxsize]*(n + 1)
+    minNumOperations[0] = 0
+    for x in range(n,0):
+        current = copy.deepcopy(x)
+        print("For x = ",x)
+        while x >= 1:
+            if x % 3 == 0:
+                print("Dividing by 3")
+                print("minNumOperations[x] = ", minNumOperations[3*x])
+                numOperations = minNumOperations[x/3] + 1
+                x = x // 3
+                
+            elif x % 2 == 0:
+                print("Dividing by 2")
+                print("minNumOperations[x] = ", minNumOperations[x*2])
+                numOperations = minNumOperations[x/2] + 1
+                x = x // 2
+                
+            else:
+                print("Subtracting 1")
+                print("minNumOperations[x] = ", minNumOperations[x + 1])
+                numOperations = minNumOperations[x-1] + 1
+                x = x - 1
+            if numOperations < minNumOperations[current]:
+                minNumOperations[current] = numOperations
+                sequence.append(x)
+    return reversed(sequence)
+
+input = sys.stdin.read()
+n = int(input)
+sequence = list(optimal_sequence(n))
+print(len(sequence) - 1)
+for x in sequence:
+    print(x, end=' ')

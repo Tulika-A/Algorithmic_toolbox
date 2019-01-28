@@ -1,0 +1,22 @@
+# Uses python3
+import sys
+
+def get_change(m):
+    coins = [1,3,4]
+    ##print("m =",m)
+    minNumCoins = list()
+    minNumCoins.append(0)
+    ##print("minNumCoins =", minNumCoins)
+    for x in range(1, m+1):
+        minNumCoins.append(sys.maxsize)
+        for i in coins:
+            if x >= i:
+                numCoins = get_change(x - i) + 1
+                if numCoins < minNumCoins[x]:
+                    minNumCoins[x] = numCoins
+            
+    return minNumCoins[m]
+
+if __name__ == '__main__':
+    ##m = int(sys.stdin.read())
+    print(get_change(34))
