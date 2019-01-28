@@ -44,35 +44,33 @@ vector<int> optimal_sequence(int n) {
       calc_op[2] = INT_MAX;
       if(x > 1)
 	{
-	  //std::cout<<"x = "<<x<<std::endl;
+	  
 	  
 	  if(x % 3 == 0)
 	    {
-	      //std::cout<<"Checking for 3"<<std::endl;
+	      
 	      calc_op[2] = minNumOperations[x/3] + 1;
 	    }
 	  if(x % 2 == 0)
 	    {
-	      //std::cout<<"Checking for 2"<<std::endl;
+	      
 	      calc_op[1] = minNumOperations[x/2] + 1;
 	    }
-	  //std::cout<<" Checking for 1"<<std::endl;  
+	    
 	  calc_op[0] = minNumOperations[x - 1] + 1;
 
 	  result = calc_min(calc_op);
-	  //std::cout<<"result = "<<result[0]<<" , "<<result[1]<<std::endl;
+	  
 	  minNumOperations[current] = result[0];
 	  operations.push_back(result[1]);
 	}
       
     }
-  // std::cout<<"operations ki length = "<<operations.size()<<std::endl;
+  
   sequence.push_back(n);
   int i = n;
   while(n > 1)
     {
-      //std::cout<<"i = "<<i<<std::endl;
-      //std::cout<<"operations[i] = "<<operations[i]<<std::endl;
       if(operations[i] == 1)
 	{
 	  n = n - 1;
